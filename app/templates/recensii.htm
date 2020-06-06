@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Рецензии по вашим интересам</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=divice-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<script src="js/script.js"></script>
+
+</head>
+<body>
+	<div class="content" id="app">
+		<div class="burger-menus" v-bind:class="{ closeburger : isClose }">
+			<div class="burger-menus_obvertka">
+				<div class="box-closemenburg" v-on:click="menyClose">
+					<img src="img/close-icg.png" alt="">
+				</div>
+				<ul class="header_list-burg">
+					<li><a href="">Вход</a></li>
+					<li><a href="">Главная</a></li>
+					<li><a href="">Что нового</a></li>
+					
+				</ul>
+				
+				<div class="inp-search-conteiner">
+					<div class="icinpserch">
+						<img src="img/seargh.png" alt="">
+					</div>
+					<input type="text">
+
+				</div>
+			</div>
+		</div>	
+		<header>
+			<div class="general-conteiner">
+			<nav class="header_nav">
+				<ul class="header_list">
+					<li><a href="">MOVIETONE</a></li>
+					<li><a href="">СЕРИАЛЫ</a></li>
+					<li><a href="">КИНО</a></li>
+					<li><a href="">ИГРЫ</a></li>
+				</ul>
+			</nav>
+				<div class="header_burger" v-on:click="menyOpen">
+					<img src="img/burger.png" alt="">
+				</div>
+			
+			</div>
+		</header>
+
+		<main>
+			<section class="secpostsWekend">
+				<div class="general-conteiner">
+					<h4 class="titlepostswekk">Рецензии по вашим интересам:</h4>
+					<div class="posts-week-conteiner">
+						
+
+						<div class="post-week-box ss23ff">
+							<div class="bost-week-box_obvertka">
+								<div class="postweek-info">
+									<div class="obse22">
+										<h4 class="titlerecens" style="color: #A71717;">Звездные войны: <br>Пробуждение силы</h4>
+									<p class="texrecense">
+										"По трейлеру было трудно понять, чего ждать от этого фильма. Сыграет ли он на славе предыдущих фильмов, или же будет самостоятельной единицей в битве за кошельки и сердца кинолюбителей."
+									</p>
+									<div class="asd">
+										<a href="" style="color: #A71717; border:solid 1px #A71717 " class="linlpostweek">ЧИТАТЬ</a>
+									</div>
+									</div>
+									
+								</div>
+								<img src="img/pt4.jpg" alt="">
+							</div>
+							<p class="autoppostsweek">автор:@railway</p>
+						</div>
+
+						<div class="post-week-box ss23ff">
+							<div class="bost-week-box_obvertka">
+								<div class="postweek-info">
+									<div class="obse22">
+										<h4 class="titlerecens" style="color: #8EA45B;">1917</h4>
+									<p class="texrecense">
+										"Вальс не для всех. Вальсирующие выглядят плавными, неспешными, а ритм танца лишён страсти. Вместо неё грация спокойных размеренных движений. Но за любым танцем стоят репетиции, труд и тяжёлая подготовка."
+									</p>
+									<div class="asd">
+										<a href="" style="color: #8EA45B; border:solid 1px #8EA45B " class="linlpostweek">ЧИТАТЬ</a>
+									</div>
+									</div>
+									
+								</div>
+								<img src="img/23.jpg" alt="">
+							</div>
+							<p class="autoppostsweek">автор:@railway</p>
+						</div>
+
+						<div class="post-week-box ss23ff">
+							<div class="bost-week-box_obvertka">
+								<div class="postweek-info">
+									<div class="obse22">
+										<h4 class="titlerecens" style="color: #D83B00;">Сиротский Бруклин</h4>
+									<p class="texrecense">
+										"Подтверждая тезис «Талантливый человек талантлив во всём», известный и любимый актёр Эдвард Нортон представил миру свою вторую режиссерскую работу — экранизацию одноименного романа Джонатана Летема «Сиротский Бруклин». Нео-нуар, провалившийся в прокате, тем не менее не может не привлечь к себе внимание."
+									</p>
+									<div class="asd">
+										<a href="" style="color: #D83B00; border:solid 1px #D83B00 " class="linlpostweek">ЧИТАТЬ</a>
+									</div>
+									</div>
+									
+								</div>
+								<img src="img/3.jpg" alt="">
+							</div>
+							<p class="autoppostsweek">автор:@railway</p>
+						</div>
+
+						
+
+					</div>
+
+					<div class="paginationlines">
+						<div class="arcons lleft">
+							<img src="img/right-arrow.png" alt="">
+						</div>
+						<div class="namber-linepagin">
+							<div class="bxpagins">1</div>
+							<div class="bxpagins">2</div>
+							<div class="bxpagins">3</div>
+						</div>
+						<div class="arcons rright">
+							<img src="img/right-arrow.png" alt="">
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+
+		<footer>
+			<div class="general-conteiner">
+				<div class="footer_sotial-line">
+					<a href="" class="footer_sotial-link">
+						<img src="img/fb.png" alt="">
+					</a>
+					<a href="" class="footer_sotial-link">
+						<img src="img/inst.png" alt="">
+					</a>
+					<a href="" class="footer_sotial-link">
+						<img src="img/telega.png" alt="">
+					</a>
+					<a href="" class="footer_sotial-link">
+						<img src="img/yotube.png" alt="">
+					</a>
+				</div>
+			<nav class="footer_nav">
+				<ul class="footer_list-nav">
+					<li><a href="">О проекте</a></li>
+					<li><a href="">Вакансии</a></li>
+					<li><a href="">Рекламодателям</a></li>
+					<li><a href="">Правила</a></li>
+					<li><a href="">Предложения</a></li>
+				</ul>
+			</nav>
+
+			<p class="footer_autor">© Movietone </p>
+
+			</div>
+			
+		</footer>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+	<script src="js/scripts.js"></script>
+</body>
+</html>

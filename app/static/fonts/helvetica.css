@@ -1,0 +1,66 @@
+@font-face {
+    font-family: HelveticaNeueCyr-Black; /* Гарнитура шрифта */
+    src: url(HelveticaNeueCyr-Black.otf); /* Путь к файлу со шрифтом */
+   }
+
+   @font-face {
+    font-family: HelveticaNeueCyr-BlackItalic; /* Гарнитура шрифта */
+    src: url(HelveticaNeueCyr-BlackItalic.otf); /* Путь к файлу со шрифтом */
+   }
+
+   @font-face {
+    font-family: HelveticaNeueCyr-Bold; /* Гарнитура шрифта */
+    src: url(HelveticaNeueCyr-Bold.otf); /* Путь к файлу со шрифтом */
+   }
+
+   @font-face {
+    font-family: HelveticaNeueCyr-BoldItalic; /* Гарнитура шрифта */
+    src: url(HelveticaNeueCyr-BoldItalic.otf); /* Путь к файлу со шрифтом */
+   }
+
+   @font-face {
+    font-family: HelveticaNeueCyr-Italic; /* Гарнитура шрифта */
+    src: url(HelveticaNeueCyr-Italic.otf); /* Путь к файлу со шрифтом */
+   }
+
+   @font-face {
+    font-family: HelveticaNeueCyr-Light; /* Гарнитура шрифта */
+    src: url(HelveticaNeueCyr-Light.otf); /* Путь к файлу со шрифтом */
+   }
+
+   @font-face {
+    font-family: HelveticaNeueCyr-LightItalic; /* Гарнитура шрифта */
+    src: url(HelveticaNeueCyr-LightItalic.otf); /* Путь к файлу со шрифтом */
+   }
+
+   @font-face {
+    font-family: HelveticaNeueCyr-Medium; /* Гарнитура шрифта */
+    src: url(HelveticaNeueCyr-Medium.otf); /* Путь к файлу со шрифтом */
+   }
+
+   @font-face {
+    font-family: HelveticaNeueCyr-Roman; /* Гарнитура шрифта */
+    src: url(HelveticaNeueCyr-Roman.otf); /* Путь к файлу со шрифтом */
+   }
+
+   @font-face {
+    font-family: HelveticaNeueCyr-Thin; /* Гарнитура шрифта */
+    src: url(HelveticaNeueCyr-Thin.otf); /* Путь к файлу со шрифтом */
+   }
+
+   @font-face {
+    font-family: HelveticaNeueCyr-ThinItalic; /* Гарнитура шрифта */
+    src: url(HelveticaNeueCyr-ThinItalic.otf); /* Путь к файлу со шрифтом */
+   }
+
+   @font-face {
+    font-family: HelveticaNeueCyr-UltraLight_0; /* Гарнитура шрифта */
+    src: url(HelveticaNeueCyr-UltraLight_0.otf); /* Путь к файлу со шрифтом */
+   }
+
+      @font-face {
+    font-family: HelveticaNeueCyr-UltraLightItalic; /* Гарнитура шрифта */
+    src: url(HelveticaNeueCyr-UltraLightItalic.otf); /* Путь к файлу со шрифтом */
+   }
+
+     

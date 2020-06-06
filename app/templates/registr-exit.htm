@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+			<section class="secregexit">
+
+				<div class="slider-panels">
+					<div class="slide-panel_line" v-bind:style="{ marginLeft : leftMRPanel}">
+					<div class="box-vhod-panel">
+			    	    <h4 class="paneltitle">MOVIETONE</h4>
+			    	    <p class="panelsubtitle">Вход</p>
+			    	    <div class="inp-palen">
+			    		    <input type="text" placeholder="Введите почту">
+			    	    </div>
+			    	    <div class="inp-palen">
+			    		    <input type="password" placeholder="Введите пароль">
+			    	    </div>
+
+			    	    <div class="btn-panel">
+			    		    <input type="submit" value="Вход">
+			    	    </div>
+			    	    <p class="texpanelvhod" v-on:click="goToRegistr">Создать аккаунт</p>
+			        </div>
+
+			        <div class="box-vhod-panel">
+			    	    <h4 class="paneltitle">MOVIETONE</h4>
+			    	    <p class="panelsubtitle">Регистрация</p>
+			    	    <div class="inp-palen">
+			    		    <input type="text" placeholder="Введите почту">
+			    	    </div>
+			    	    <div class="inp-palen">
+			    		    <input type="password" placeholder="Введите пароль">
+			    	    </div>
+
+			    	    <div class="btn-panel">
+			    		    <input type="submit" value="Регистрация">
+			    	    </div>
+			    	    <p class="texpanelvhod"  v-on:click="goToVhod">Уже есть аккаунт</p>
+			        </div>
+
+			        </div>
+
+				</div>
+
+			</section>
+{% endblock %}

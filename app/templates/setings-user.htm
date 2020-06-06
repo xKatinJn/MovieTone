@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>верстка по макету</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=divice-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<script src="js/script.js"></script>
+
+</head>
+<body>
+	<div class="content" id="app">
+		<div class="burger-menus" v-bind:class="{ closeburger : isClose }">
+			<div class="burger-menus_obvertka">
+				<div class="box-closemenburg" v-on:click="menyClose">
+					<img src="img/close-icg.png" alt="">
+				</div>
+				<ul class="header_list-burg">
+					<li><a href="">Вход</a></li>
+					<li><a href="">Главная</a></li>
+					<li><a href="">Что нового</a></li>
+					
+				</ul>
+				
+				<div class="inp-search-conteiner">
+					<div class="icinpserch">
+						<img src="img/seargh.png" alt="">
+					</div>
+					<input type="text">
+
+				</div>
+			</div>
+		</div>	
+		<header>
+			<div class="general-conteiner">
+			<nav class="header_nav">
+				<ul class="header_list">
+					<li><a href="">MOVIETONE</a></li>
+					<li><a href="">СЕРИАЛЫ</a></li>
+					<li><a href="">КИНО</a></li>
+					<li><a href="">ИГРЫ</a></li>
+				</ul>
+			</nav>
+				<div class="header_burger" v-on:click="menyOpen">
+					<img src="img/burger.png" alt="">
+				</div>
+			
+			</div>
+		</header>
+
+		<main>
+			<section class="secsetings">
+			    <div class="general-conteiner">
+			    	<div class="user-setings_line-top">
+			    		<h3 class="titleuser-setings">Параметры входа</h3>
+			    		<div class="user-setings_top-line_pas-conteiner">
+			    			<div class="pas-conteiner_box">
+			    				<h4>Сменить пароль</h4>
+			    				<p>Повысьте надежность пароля</p>
+			    				<a>Изменить</a>
+			    			</div>
+
+			    			<div class="pas-conteiner_box">
+			    				<h4>Сменить почту</h4>
+			    				<p>Или логин при входе в систему</p>
+			    				<a>Изменить</a>
+			    			</div>
+			    		</div>
+			    	</div>
+
+			    	<div class="user-concret-setings-conteiner">
+			    		<div class="profile-cont">
+			    			<p class="name-setings">Профиль</p>
+			    			<div class="linesproavatar">
+			    				<div class="asdk2">
+			    				<div class="conteiner-photo-image">
+			    				    <img src="img/us3.png" alt="">
+			    			    </div>
+			    			    <p class="addavatar">Добавить аватар</p>
+			    			</div>
+			    			<div class="masd23">
+			    				<p class="nameuserss">@railway</p>
+			    				<p class="redact-username">Сменить показываемое имя</p>
+			    				<a href="mailto: railway@gmail.com" class="emailusers">railway@gmail.com</a>
+			    				<p class="sexussers">male</p>
+			    				<p class="countruusers">Россия</p>
+			    			</div>
+			    			</div>
+			    			
+			    			
+			    		</div>
+			    		<div class="dannie-conteiner">
+			    			<p class="name-setings">Данные</p>
+			    			<div class="linukllss">
+			    				<ul class="ulusul">
+			    				<li>
+			    					<div class="icusff">
+			    						<img src="img/us2.png" alt="">
+			    					</div>
+			    					<p>Самат Магзумов</p>
+			    				</li>
+
+			    				<li>
+			    					<div class="icusff">
+			    						<img src="img/us5.png" alt="">
+			    					</div>
+			    					<p>07.03.2000</p>
+			    				</li>
+
+			    				<li>
+			    					<div class="icusff">
+			    						<img src="img/us1.png" alt="">
+			    					</div>
+			    					<p>Male</p>
+			    				</li>
+
+			    				<li>
+			    					<div class="icusff">
+			    						<img src="img/us4.png" alt="">
+			    					</div>
+			    					<p>Россия</p>
+			    				</li>
+
+			    				<li>
+			    					<div class="icusff">
+			    						<img src="img/us6.png" alt="">
+			    					</div>
+			    					<p>Русский</p>
+			    				</li>
+			    			</ul>
+			    			<div class="ulredactusers">
+			    				<li>Сменить имя</li>
+			    				<li>Сменить дату рождения</li>
+			    				<li>Указать пол</li>
+			    				<li>Указать страну</li>
+			    				<li>Указать язык</li>
+			    			</div>
+			    			</div>
+
+			    			
+			    		</div>
+			    	</div>
+			    </div>
+			</section>
+		</main>
+
+
+		<footer>
+			<div class="general-conteiner">
+				<div class="footer_sotial-line">
+					<a href="" class="footer_sotial-link">
+						<img src="img/fb.png" alt="">
+					</a>
+					<a href="" class="footer_sotial-link">
+						<img src="img/inst.png" alt="">
+					</a>
+					<a href="" class="footer_sotial-link">
+						<img src="img/telega.png" alt="">
+					</a>
+					<a href="" class="footer_sotial-link">
+						<img src="img/yotube.png" alt="">
+					</a>
+				</div>
+			<nav class="footer_nav">
+				<ul class="footer_list-nav">
+					<li><a href="">О проекте</a></li>
+					<li><a href="">Вакансии</a></li>
+					<li><a href="">Рекламодателям</a></li>
+					<li><a href="">Правила</a></li>
+					<li><a href="">Предложения</a></li>
+				</ul>
+			</nav>
+
+			<p class="footer_autor">© Movietone </p>
+
+			</div>
+			
+		</footer>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+	<script src="js/scripts.js"></script>
+</body>
+</html>

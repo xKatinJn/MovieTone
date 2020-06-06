@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{title}}</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/style.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=divice-width, initial-scale=1.0">
+	<meta name="description" content="">
+</head>
+<body>
+	<div class="content" id="app">
+		<div class="burger-menus" v-bind:class="{ closeburger : isClose }">
+			<div class="burger-menus_obvertka">
+				<div class="box-closemenburg" v-on:click="menyClose">
+					<img src="../static/img/close-icg.png" alt="">
+				</div>
+				<ul class="header_list-burg">
+					{% if current_user.is_anonymous %}
+						<li><a href="{{ url_for('signin') }}">Вход</a></li>
+					{% else %}
+						<li><a href="">Профиль</a></li>
+					{% endif %}
+					<li><a href="{{ url_for('index') }}">Главная</a></li>
+					<li><a href="">Что нового</a></li>
+
+				</ul>
+
+				<div class="inp-search-conteiner">
+					<div class="icinpserch">
+						<img src="../static/img/seargh.png" alt="">
+					</div>
+					<input type="text">
+
+				</div>
+			</div>
+		</div>
+		<header>
+			<div class="general-conteiner">
+			<nav class="header_nav">
+				<ul class="header_list">
+					<li><a href="">MOVIETONE</a></li>
+					<li><a href="">СЕРИАЛЫ</a></li>
+					<li><a href="">КИНО</a></li>
+					<li><a href="">ИГРЫ</a></li>
+				</ul>
+			</nav>
+				<div class="header_burger" v-on:click="menyOpen">
+					<img src="../static/img/burger.png" alt="">
+				</div>
+
+			</div>
+		</header>
+		<main>
+		{% block content %}
+		{% endblock %}
+		</main>
+		{% extends "footer.html" %}
+	</div>
+	{% block scripts %} {% endblock %}
+</body>
+</html>

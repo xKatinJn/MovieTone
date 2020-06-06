@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>верстка по макету</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=divice-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<script src="js/script.js"></script>
+
+</head>
+<body>
+	<div class="content" id="app">
+		<div class="burger-menus" v-bind:class="{ closeburger : isClose }">
+			<div class="burger-menus_obvertka">
+				<div class="box-closemenburg" v-on:click="menyClose">
+					<img src="img/close-icg.png" alt="">
+				</div>
+				<ul class="header_list-burg">
+					<li><a href="">Вход</a></li>
+					<li><a href="">Главная</a></li>
+					<li><a href="">Что нового</a></li>
+					
+				</ul>
+				
+				<div class="inp-search-conteiner">
+					<div class="icinpserch">
+						<img src="img/seargh.png" alt="">
+					</div>
+					<input type="text">
+
+				</div>
+			</div>
+		</div>	
+		<header>
+			<div class="general-conteiner">
+			<nav class="header_nav">
+				<ul class="header_list">
+					<li><a href="">MOVIETONE</a></li>
+					<li><a href="">СЕРИАЛЫ</a></li>
+					<li><a href="">КИНО</a></li>
+					<li><a href="">ИГРЫ</a></li>
+				</ul>
+			</nav>
+				<div class="header_burger" v-on:click="menyOpen">
+					<img src="img/burger.png" alt="">
+				</div>
+			
+			</div>
+		</header>
+
+		<main>
+			<section class="secpost">
+				<div class="image-post">
+					<img src="img/post-image.jpg" alt="">
+				</div>
+			    <div class="general-conteiner">
+			    	<div class="title-postspage-line">
+			    		<h3 class="post-titl">Звездные войны: <br>Пробуждение силы</h3>
+			    		<p class="autor-posts">автор:@railway</p>
+			    	</div>
+
+			    	<div class="post-contenttext">
+			    		<p>По трейлеру было трудно понять, чего ждать от этого фильма. Сыграет ли он на славе предыдущих фильмов, или же будет самостоятельной единицей в битве за кошельки и сердца кинолюбителей. Многим не понравилось то, что одним из первостепенных актеров является афроамериканец, но я вам скажу, что во время фильма это не бросается в глаза, а актриса, играющая Рэй, очень радует. Из минусов - отношение к деталям, важным для любителей старых трилогий, не на высоте.<br><br> Да и сюжет, если посмотреть бесстрастно, очень сильно напоминает ту же 'Новую надежду' - безымянный герой, копающийся в старой электронике на пустынной планете, вдруг находит дроида с ценной информацией, скрывается от Темной стороны, становится избранным, открывает в себе Силу и участвует в уничтожении некоего подобия Звезды Смерти. Хотя похожесть эту нельзя и минусом назвать, ведь быть похожим на такие легендарные фильмы - это явно не самое худшее. А при современном отношении к кинематографу у людей, создающих все новые и новые поделия<br><br> - огромный плюс. Как и то, что новых героев в нелегкий путь сопровождают герои старые, герои моего детства. Постаревшие Люк, капитан Соло и Лея своим появлением вызывают те чувства, что словами в фильме описал лихой капитан:'Чуи, мы дома!' </p>
+			    		<img src="img/13.jpg" alt="">
+			    		<p> Так и есть, плюс великолепная картинка(лично у меня вызвала трепет картина имперского крейсера, скрывшегося наполовину в песке)и масштабы, а также непревзойденный Джон Уильямс и его 'Binary Sunset',знакомая с юных лет. Провалов в сюжете действительно мало, если они вообще есть. Музыка на месте, картинка тоже, атмосфера - присутствует. Вывод таков, что я готов (пусть меня и закидают камнями те, кто так считает) плюнуть в лицо критикам, которые назвали 'Безумный Макс:Дорога Ярости' фильмом года, потому что фильм года - тот, который для меня закончился два часа назад. Если вас интересует,<br><br> стоит ли сходить на этот фильм, то скажу вам еще одно - я зарегистрировался здесь специально для того, чтобы написать этот отзыв. Потому что вам действительно стоит на это посмотреть, и я хочу помочь вам определиться с выбором - идти или нет. Бежать! Бежать быстрее, чем повстанцы, нашедшие Последнего Джедая. И да пребудет с вами Сила.<br> 10 из 10</p>
+			    	</div>
+			    </div>
+			</section>
+		</main>
+
+
+		<footer>
+			<div class="general-conteiner">
+				<div class="footer_sotial-line">
+					<a href="" class="footer_sotial-link">
+						<img src="img/fb.png" alt="">
+					</a>
+					<a href="" class="footer_sotial-link">
+						<img src="img/inst.png" alt="">
+					</a>
+					<a href="" class="footer_sotial-link">
+						<img src="img/telega.png" alt="">
+					</a>
+					<a href="" class="footer_sotial-link">
+						<img src="img/yotube.png" alt="">
+					</a>
+				</div>
+			<nav class="footer_nav">
+				<ul class="footer_list-nav">
+					<li><a href="">О проекте</a></li>
+					<li><a href="">Вакансии</a></li>
+					<li><a href="">Рекламодателям</a></li>
+					<li><a href="">Правила</a></li>
+					<li><a href="">Предложения</a></li>
+				</ul>
+			</nav>
+
+			<p class="footer_autor">© Movietone </p>
+
+			</div>
+			
+		</footer>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+	<script src="js/scripts.js"></script>
+</body>
+</html>
