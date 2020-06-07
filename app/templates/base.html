@@ -16,12 +16,15 @@
 				</div>
 				<ul class="header_list-burg">
 					{% if current_user.is_anonymous %}
-						<li><a href="{{ url_for('signin') }}">Вход</a></li>
+						<li><a href="{{ url_for('sign') }}">Вход</a></li>
 					{% else %}
 						<li><a href="">Профиль</a></li>
 					{% endif %}
 					<li><a href="{{ url_for('index') }}">Главная</a></li>
 					<li><a href="">Что нового</a></li>
+					{% if current_user.is_authenticated %}
+						<li><a href="{{ url_for('logout') }}">Выйти</a></li>
+					{% endif %}
 
 				</ul>
 
@@ -38,7 +41,7 @@
 			<div class="general-conteiner">
 			<nav class="header_nav">
 				<ul class="header_list">
-					<li><a href="">MOVIETONE</a></li>
+					<li><a href="{{ url_for('index') }}">MOVIETONE</a></li>
 					<li><a href="">СЕРИАЛЫ</a></li>
 					<li><a href="">КИНО</a></li>
 					<li><a href="">ИГРЫ</a></li>

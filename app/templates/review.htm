@@ -1,55 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Рецензии по вашим интересам</title>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=divice-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<script src="js/script.js"></script>
-
-</head>
-<body>
-	<div class="content" id="app">
-		<div class="burger-menus" v-bind:class="{ closeburger : isClose }">
-			<div class="burger-menus_obvertka">
-				<div class="box-closemenburg" v-on:click="menyClose">
-					<img src="img/close-icg.png" alt="">
-				</div>
-				<ul class="header_list-burg">
-					<li><a href="">Вход</a></li>
-					<li><a href="">Главная</a></li>
-					<li><a href="">Что нового</a></li>
-					
-				</ul>
-				
-				<div class="inp-search-conteiner">
-					<div class="icinpserch">
-						<img src="img/seargh.png" alt="">
-					</div>
-					<input type="text">
-
-				</div>
-			</div>
-		</div>	
-		<header>
-			<div class="general-conteiner">
-			<nav class="header_nav">
-				<ul class="header_list">
-					<li><a href="">MOVIETONE</a></li>
-					<li><a href="">СЕРИАЛЫ</a></li>
-					<li><a href="">КИНО</a></li>
-					<li><a href="">ИГРЫ</a></li>
-				</ul>
-			</nav>
-				<div class="header_burger" v-on:click="menyOpen">
-					<img src="img/burger.png" alt="">
-				</div>
-			
-			</div>
-		</header>
-
-		<main>
+{% extends "base.html" %}
+{% block content %}
 			<section class="secpostsWekend">
 				<div class="general-conteiner">
 					<h4 class="titlepostswekk">Рецензии по вашим интересам:</h4>
@@ -70,7 +20,7 @@
 									</div>
 									
 								</div>
-								<img src="img/pt4.jpg" alt="">
+								<img src="../static/img/pt4.jpg" alt="">
 							</div>
 							<p class="autoppostsweek">автор:@railway</p>
 						</div>
@@ -89,7 +39,7 @@
 									</div>
 									
 								</div>
-								<img src="img/23.jpg" alt="">
+								<img src="../static/img/23.jpg" alt="">
 							</div>
 							<p class="autoppostsweek">автор:@railway</p>
 						</div>
@@ -108,18 +58,15 @@
 									</div>
 									
 								</div>
-								<img src="img/3.jpg" alt="">
+								<img src="../static/img/3.jpg" alt="">
 							</div>
 							<p class="autoppostsweek">автор:@railway</p>
 						</div>
-
-						
-
 					</div>
 
 					<div class="paginationlines">
 						<div class="arcons lleft">
-							<img src="img/right-arrow.png" alt="">
+							<img src="../static/img/right-arrow.png" alt="">
 						</div>
 						<div class="namber-linepagin">
 							<div class="bxpagins">1</div>
@@ -127,47 +74,9 @@
 							<div class="bxpagins">3</div>
 						</div>
 						<div class="arcons rright">
-							<img src="img/right-arrow.png" alt="">
+							<img src="../static/img/right-arrow.png" alt="">
 						</div>
 					</div>
 				</div>
 			</section>
-		</main>
-
-
-		<footer>
-			<div class="general-conteiner">
-				<div class="footer_sotial-line">
-					<a href="" class="footer_sotial-link">
-						<img src="img/fb.png" alt="">
-					</a>
-					<a href="" class="footer_sotial-link">
-						<img src="img/inst.png" alt="">
-					</a>
-					<a href="" class="footer_sotial-link">
-						<img src="img/telega.png" alt="">
-					</a>
-					<a href="" class="footer_sotial-link">
-						<img src="img/yotube.png" alt="">
-					</a>
-				</div>
-			<nav class="footer_nav">
-				<ul class="footer_list-nav">
-					<li><a href="">О проекте</a></li>
-					<li><a href="">Вакансии</a></li>
-					<li><a href="">Рекламодателям</a></li>
-					<li><a href="">Правила</a></li>
-					<li><a href="">Предложения</a></li>
-				</ul>
-			</nav>
-
-			<p class="footer_autor">© Movietone </p>
-
-			</div>
-			
-		</footer>
-	</div>
-	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
-	<script src="js/scripts.js"></script>
-</body>
-</html>
+{% endblock %}

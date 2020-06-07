@@ -7,32 +7,46 @@
 					<div class="box-vhod-panel">
 			    	    <h4 class="paneltitle">MOVIETONE</h4>
 			    	    <p class="panelsubtitle">Вход</p>
-			    	    <div class="inp-palen">
-			    		    <input type="text" placeholder="Введите почту">
-			    	    </div>
-			    	    <div class="inp-palen">
-			    		    <input type="password" placeholder="Введите пароль">
-			    	    </div>
+						<form action="" method="post">
+							{{ log_form.hidden_tag() }}
+							{{ log_form.csrf_token() }}
+							<div class="inp-palen">
+								{{ log_form.email() }}
+							</div>
+							<div class="inp-palen">
+								{{ log_form.password() }}
+								{% if log_error %}
+									<span class="error">Неправильная почта или пароль</span>
+								{% endif %}
+							</div>
 
-			    	    <div class="btn-panel">
-			    		    <input type="submit" value="Вход">
-			    	    </div>
+							<div class="btn-panel">
+								{{ log_form.log_submit() }}
+							</div>
+						</form>
 			    	    <p class="texpanelvhod" v-on:click="goToRegistr">Создать аккаунт</p>
 			        </div>
 
 			        <div class="box-vhod-panel">
 			    	    <h4 class="paneltitle">MOVIETONE</h4>
 			    	    <p class="panelsubtitle">Регистрация</p>
-			    	    <div class="inp-palen">
-			    		    <input type="text" placeholder="Введите почту">
-			    	    </div>
-			    	    <div class="inp-palen">
-			    		    <input type="password" placeholder="Введите пароль">
-			    	    </div>
+						<form action="" method="post">
+							{{ reg_form.hidden_tag() }}
+							{{ reg_form.csrf_token() }}
+							<div class="inp-palen">
+								{{ reg_form.email() }}
+								{% for err in reg_form.email.errors %}
+									<span class="error">{{ err }}</span>
+								{% endfor %}
+							</div>
+							<div class="inp-palen">
+								{{ reg_form.password() }}
+							</div>
 
-			    	    <div class="btn-panel">
-			    		    <input type="submit" value="Регистрация">
-			    	    </div>
+							<div class="btn-panel">
+								{{ reg_form.reg_submit() }}
+							</div>
+						</form>
 			    	    <p class="texpanelvhod"  v-on:click="goToVhod">Уже есть аккаунт</p>
 			        </div>
 

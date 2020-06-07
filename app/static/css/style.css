@@ -1049,6 +1049,9 @@ font-size: 48px;
 	margin-top: 90px;
 }
 
-
+.error{
+    color: red;
+    margin-top: 10px;
+}
 
 @media only screen and (max-width: 768px)
