@@ -18,10 +18,10 @@
 					{% if current_user.is_anonymous %}
 						<li><a href="{{ url_for('sign') }}">Вход</a></li>
 					{% else %}
-						<li><a href="">Профиль</a></li>
+						<li><a href="{{ url_for('user_profile', user_id=current_user.id) }}">Профиль</a></li>
 					{% endif %}
 					<li><a href="{{ url_for('index') }}">Главная</a></li>
-					<li><a href="">Что нового</a></li>
+					<li><a href="{{ url_for('new_weekend_posts') }}">Что нового</a></li>
 					{% if current_user.is_authenticated %}
 						<li><a href="{{ url_for('logout') }}">Выйти</a></li>
 					{% endif %}

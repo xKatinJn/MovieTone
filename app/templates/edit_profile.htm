@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+{% block content %}
+			<section class="secsetings">
+			    <div class="general-conteiner">
+			    	<div class="user-setings_line-top">
+			    		<h3 class="titleuser-setings">Параметры входа</h3>
+			    		<div class="user-setings_top-line_pas-conteiner">
+			    			<div class="pas-conteiner_box">
+								{% if edit.password %}
+									<form action="" method="post">
+										{{ form.hidden_tag() }}
+										{{ form.csrf_token() }}
+										<div class="inp-palen">
+											<p class="nameuserss">{{ form.password(style="height: 50%") }}</p>
+											<p class="nameuserss">{{ form.password_rep(style="height: 50%") }}</p>
+											{% for error in form.password_rep.errors %}
+												<p class="error">{{ error }}</p>
+											{% endfor %}
+										</div>
+										<div class="btn-panel" style="display: inline-block; white-space: nowrap; margin-bottom: 10px;">
+											{{ form.submit(style="width: 50%; text-align: center") }}
+											{{ form.back(style="width: 50%; text-align: center") }}
+										</div>
+									</form>
+								{% else %}
+									<h4>Сменить пароль</h4>
+									<p>Повысьте надежность пароля</p>
+									<a href="{{ url_for('edit_profile', password=1) }}">Изменить</a>
+								{% endif %}
+			    			</div>
+
+			    			<div class="pas-conteiner_box">
+								{% if edit.email %}
+									<form action="" method="post">
+										{{ form.hidden_tag() }}
+										{{ form.csrf_token() }}
+										<div class="inp-palen">
+											<p class="nameuserss">{{ form.email }}</p>
+											{% if email_error %}
+												<p class="error">Почта занята</p>
+											{% endif %}
+											{% for error in form.email.errors %}
+												<p class="error">{{ error }}</p>
+											{% endfor %}
+										</div>
+										<div class="btn-panel" style="display: inline-block; white-space: nowrap; margin-bottom: 10px;">
+											{{ form.submit(style="width: 50%; text-align: center") }}
+											{{ form.back(style="width: 50%; text-align: center") }}
+										</div>
+									</form>
+								{% else %}
+									<h4>Сменить почту</h4>
+									<p>Или логин при входе в систему</p>
+									<a href="{{ url_for('edit_profile', email=1) }}">Изменить</a>
+								{% endif %}
+			    			</div>
+			    		</div>
+			    	</div>
+
+			    	<div class="user-concret-setings-conteiner">
+			    		<div class="profile-cont">
+			    			<p class="name-setings">Профиль</p>
+			    			<div class="linesproavatar">
+			    				<div class="asdk2">
+			    				<div class="conteiner-photo-image">
+									{% if current_user.has_photo %}
+										<img src="{{ current_user.photo_path }}" alt="">
+									{% else %}
+			    				    	<img src="../static/img/us3.png" alt="">
+									{% endif %}
+			    			    </div>
+								{% if current_user.has_photo %}
+									<p class="addavatar" style="text-align: left;">Обновите фото</p>
+								{% else %}
+									<p class="addavatar" style="text-align: left;">Загрузите фото</p>
+								{% endif %}
+								<form action="{{ url_for('upload_profile_photo') }}" method="POST" enctype="multipart/form-data">
+									<input class="addavatar" type="file" name="user_profile_photo_{{ current_user.id }}" title="Добавить аватар">
+									<div class="btn-panel">
+										<input class="addavatar" type="submit">
+									</div>
+								</form>
+								{% if request.args.get('photo_error') %}
+									<p class="error">Неправильный формат фото</p>
+								{% elif request.args.get('entity_error') %}
+									<p class="error">Размер фото превышает 12мб.</p>
+								{% endif %}
+			    			</div>
+			    			<div class="masd23">
+								{% if edit.nickname %}
+									<form action="" method="post">
+										{{ form.hidden_tag() }}
+										{{ form.csrf_token() }}
+										<div class="inp-palen">
+											<p class="nameuserss">{{ form.nickname(size=32) }}</p>
+											{% if nickname_error %}
+												<p class="error">Никнейм занят</p>
+											{% endif %}
+										</div>
+										<div class="btn-panel" style="display: inline-block; white-space: nowrap; margin-bottom: 10px;">
+											{{ form.submit(style="width: 50%; text-align: center") }}
+											{{ form.back(style="width: 50%; text-align: center") }}
+										</div>
+									</form>
+								{% else %}
+			    					<p class="nameuserss">@{{ current_user.nickname }}</p>
+									<a href="{{ url_for('edit_profile', nickname=1) }}"><p class="redact-username">Сменить показываемое имя</p></a>
+								{% endif %}
+			    				<a href="mailto: railway@gmail.com" class="emailusers">{{ current_user.email }}</a>
+								{% if current_user.sex %}
+									<p class="sexussers">{{ current_user.sex }}</p>
+								{% else %}
+									<p class="sexussers">Пол не указан</p>
+								{% endif %}
+								{% if current_user.country %}
+			    					<p class="countruusers">{{ current_user.country}}</p>
+								{% else %}
+									<p class="countruusers">Страна не указана</p>
+								{% endif %}
+			    			</div>
+			    			</div>
+
+
+			    		</div>
+			    		<div class="dannie-conteiner">
+			    			<p class="name-setings">Данные</p>
+			    			<div class="linukllss">
+			    				<ul class="ulusul">
+			    				<li>
+			    					<div class="icusff">
+			    						<img src="../static/img/us2.png" alt="">
+			    					</div>
+									{% if edit.name %}
+										<form action="" method="post">
+											{{ form.hidden_tag() }}
+											{{ form.csrf_token() }}
+											<div class="inp-palen">
+												<p class="nameuserss">{{ form.name }}</p>
+											</div>
+											<div class="btn-panel" style="display: inline-block; white-space: nowrap; margin-bottom: 10px;">
+												{{ form.submit(style="width: 50%; text-align: center") }}
+												{{ form.back(style="width: 50%; text-align: center") }}
+											</div>
+										</form>
+									{% elif current_user.name %}
+			    						<p>{{ current_user.name }}</p>
+									{% else %}
+										<p>Имя не указано</p>
+									{% endif %}
+			    				</li>
+
+			    				<li>
+			    					<div class="icusff">
+			    						<img src="../static/img/us5.png" alt="">
+			    					</div>
+									{% if edit.birthday %}
+										<form action="" method="post">
+											{{ form.hidden_tag() }}
+											{{ form.csrf_token() }}
+											<div class="inp-palen">
+												<p class="nameuserss">{{ form.birthday(id="date") }}</p>
+											</div>
+											<div class="btn-panel" style="display: inline-block; white-space: nowrap; margin-bottom: 10px;">
+												{{ form.submit(style="width: 50%; text-align: center") }}
+												{{ form.back(style="width: 50%; text-align: center") }}
+											</div>
+										</form>
+									{% elif current_user.birthday %}
+			    						<p>{{ current_user.birthday }}</p>
+									{% else %}
+										<p>Дата рождения не указана</p>
+									{% endif %}
+			    				</li>
+
+			    				<li>
+			    					<div class="icusff">
+			    						<img src="../static/img/us1.png" alt="">
+			    					</div>
+									{% if edit.sex %}
+										<form action="" method="post">
+											{{ form.hidden_tag() }}
+											{{ form.csrf_token() }}
+											<div class="inp-palen">
+												<p class="nameuserss">{{ form.sex }}</p>
+											</div>
+											<div class="btn-panel" style="display: inline-block; white-space: nowrap; margin-bottom: 10px;">
+												{{ form.submit(style="width: 50%; text-align: center") }}
+												{{ form.back(style="width: 50%; text-align: center") }}
+											</div>
+										</form>
+									{% elif current_user.sex %}
+			    						<p>{{ current_user.sex }}</p>
+									{% else %}
+										<p>Пол не указан</p>
+									{% endif %}
+			    				</li>
+
+			    				<li>
+			    					<div class="icusff">
+			    						<img src="../static/img/us4.png" alt="">
+			    					</div>
+			    					{% if edit.country %}
+										<form action="" method="post">
+											{{ form.hidden_tag() }}
+											{{ form.csrf_token() }}
+											<div class="inp-palen">
+												<p class="nameuserss">{{ form.country }}</p>
+											</div>
+											<div class="btn-panel" style="display: inline-block; white-space: nowrap; margin-bottom: 10px;">
+												{{ form.submit(style="width: 50%; text-align: center") }}
+												{{ form.back(style="width: 50%; text-align: center") }}
+											</div>
+										</form>
+									{% elif current_user.country %}
+			    						<p>{{ current_user.country }}</p>
+									{% else %}
+										<p>Страна не указана</p>
+									{% endif %}
+			    				</li>
+
+			    				<li>
+			    					<div class="icusff">
+			    						<img src="../static/img/us6.png" alt="">
+			    					</div>
+			    					{% if edit.language %}
+										<form action="" method="post">
+											{{ form.hidden_tag() }}
+											{{ form.csrf_token() }}
+											<div class="inp-palen">
+												<p class="nameuserss">{{ form.language }}</p>
+											</div>
+											<div class="btn-panel" style="display: inline-block; white-space: nowrap; margin-bottom: 10px;">
+												{{ form.submit(style="width: 50%; text-align: center") }}
+												{{ form.back(style="width: 50%; text-align: center") }}
+											</div>
+										</form>
+									{% elif current_user.language %}
+			    						<p>{{ current_user.language }}</p>
+									{% else %}
+										<p>Язык не указан</p>
+									{% endif %}
+			    				</li>
+			    			</ul>
+			    			<div class="ulredactusers">
+								<a href="{{ url_for('edit_profile', name=1) }}"><li>Сменить имя</li></a>
+								<a href="{{ url_for('edit_profile', birthday=1) }}"><li>Сменить дату рождения</li></a>
+								<a href="{{ url_for('edit_profile', sex=1) }}"><li>Указать пол</li></a>
+			    				<a href="{{ url_for('edit_profile', country=1) }}"><li>Указать страну</li></a>
+								<a href="{{ url_for('edit_profile', language=1) }}"><li>Указать язык</li></a>
+			    			</div>
+			    			</div>
+			    		</div>
+			    	</div>
+			    </div>
+			</section>
+{% endblock %}

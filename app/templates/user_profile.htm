@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block content %}
+			<section class="seckabs">
+				<div class="sec-cabs_topline">
+					<div class="linesproavatar">
+			    				<div class="asdk2">
+			    				<div class="conteiner-photo-image">
+									{% if current_user.has_photo %}
+										<img src="{{ current_user.photo_path }}" alt="">
+									{% else %}
+			    				    	<img src="../static/img/us3.png" alt="">
+									{% endif %}
+			    			    </div>
+			    			    
+			    			</div>
+			    			<div class="masd23">
+			    				<p class="nameuserss">@{{user.nickname}}</p>
+			    				
+			    				<a href="mailto: {{ user.email }}" class="emailusers">{{ user.email }}</a>
+								{% if user.sex %}
+									<p class="sexussers">{{ user.sex }}</p>
+								{% else %}
+									<p class="sexussers">Пол не указан</p>
+								{% endif %}
+								{% if user.country %}
+			    					<p class="countruusers">{{ user.country }}</p>
+								{% else %}
+									<p class="countruusers">Страна не указана</p>
+								{% endif %}
+			    			</div>
+			    			</div>
+
+			    			<div class="linekab-namber-post">
+			    				<div class="namber-postbox">
+			    					<h4>Просмотренных рецензий: <br>5</h4>
+			    				</div>
+			    				<div class="namber-postbox">
+			    					<h4>Написанных рецензий:<br> 20</h4>
+			    				</div>
+			    			</div>	
+				</div>
+				{% if current_user.id == user.id %}
+					<div class="linesredarlink">
+						<a href="{{ url_for('edit_profile') }}">Редактировать профиль</a>
+					</div>
+				{% endif %}
+				<div class="cont-user-recensies">
+					<h3 class="titleusrecens">Последние рецензии</h3>
+					<div class="line-recensiiuss">
+						<a href="" class="line-recensiiuss_box">
+							<div class="boxborss">
+								<img src="../static/img/333jpg.jpg" alt="">
+							</div>
+							
+							<p>READ DEAD ONLINE</p>
+						</a>
+
+						<a href="" class="line-recensiiuss_box">
+							<div class="boxborss">
+								<img src="../static/img/most2.jpg" alt="">
+							</div>
+							
+							<p>КОМНАТА</p>
+						</a>
+
+						<a href="" class="line-recensiiuss_box">
+							<div class="boxborss">
+								<img src="../static/img/most4.jpg" alt="">
+							</div>
+							
+							<p>ВЫПУСКНИК</p>
+						</a>
+
+						<a href="" class="line-recensiiuss_box">
+							<div class="boxborss">
+								<img src="../static/img/most3.jpg" alt="">
+							</div>
+							
+							<p>АКАДЕМИЯ РАШМОР</p>
+						</a>
+
+						<a href="" class="line-recensiiuss_box">
+							<div class="boxborss">
+								<img src="../static/img/most1.jpg" alt="">
+							</div>
+							
+							<p>БУТЫЛОЧНАЯ РАКЕТА</p>
+						</a>
+
+						<a href="" class="line-recensiiuss_box">
+							<div class="boxborss">
+								<img src="../static/img/most8.jpg" alt="">
+							</div>
+							
+							<p>JOURNEY</p>
+						</a>
+
+						<a href="" class="line-recensiiuss_box">
+							<div class="boxborss">
+								<img src="../static/img/most5.jpg" alt="">
+							</div>
+							
+							<p>АРАХИСОВЫЙ СОКОЛ</p>
+						</a>
+
+						<a href="" class="line-recensiiuss_box">
+							<div class="boxborss">
+								<img src="../static/img/most6.jpg" alt="">
+							</div>
+							
+							<p>DEATH STRANDING</p>
+						</a>
+					</div>
+				</div>
+			</section>
+{% endblock %}

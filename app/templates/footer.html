@@ -1,16 +1,16 @@
 <footer>
     <div class="general-conteiner">
         <div class="footer_sotial-line">
-            <a href="" class="footer_sotial-link">
+            <a href="https://www.facebook.com/groups/2714265718675424" class="footer_sotial-link" target="_blank">
                 <img src="../static/img/fb.png" alt="">
             </a>
-            <a href="" class="footer_sotial-link">
+            <a href="https://www.instagram.com/movietone_team/" class="footer_sotial-link" target="_blank">
                 <img src="../static/img/inst.png" alt="">
             </a>
-            <a href="" class="footer_sotial-link">
+            <a href="https://tglink.ru/MovieToneTeam" class="footer_sotial-link" target="_blank">
                 <img src="../static/img/telega.png" alt="">
             </a>
-            <a href="" class="footer_sotial-link">
+            <a href="https://www.youtube.com/channel/UCuFmH6KglFg9_jX_tEsa5cQ/featured" class="footer_sotial-link" target="_blank">
                 <img src="../static/img/yotube.png" alt="">
             </a>
         </div>
@@ -31,3 +31,15 @@
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
 <script src="../static/js/scripts.js"></script>
+{% if request.path == "/edit_profile" %}
+    <script src="{{url_for('static', filename='js/jquery.maskedinput.min.js')}}"></script>
+    <script>
+    $( document ).ready(function() {
+        $("#date").mask("9999-99-99");
+    });
+
+        $('#participate').click(function(){
+            $('#teams').slideToggle(300);
+        });
+    </script>
+{% endif %}
