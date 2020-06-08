@@ -15,6 +15,6 @@ app.config['MAX_CONTENT_PATH'] = 12000000
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
-login.login_view = 'login'
+login.login_view = '/sign'
 
 from app import routes, models

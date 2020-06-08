@@ -36,10 +36,7 @@ def sign():
         user = User.query.filter_by(id=current_user.id).first()
         user.nickname = 'User_'+str(user.id)
         db.session.commit()
-        next_page = request.args.get('next')
-        if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('index')
-        return redirect(next_page)
+        return redirect(url_for('edit_profile'))
     if log_form.log_submit.data and log_form.validate():
         email = log_form.email.data
         user = User.query.filter_by(email=email).first()
@@ -55,6 +52,7 @@ def sign():
 
 
 @app.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect('sign')
@@ -91,6 +89,7 @@ def user_profile():
 
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
+@login_required
 def edit_profile():
     form = EditProfileForm()
     edit = {}
@@ -135,6 +134,7 @@ def edit_profile():
 
 
 @app.route('/upload_profile_photo', methods=['POST'])
+@login_required
 def upload_profile_photo():
     if request.method == 'POST':
         try:
