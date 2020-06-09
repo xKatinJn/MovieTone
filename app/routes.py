@@ -152,3 +152,8 @@ def upload_profile_photo():
             return redirect('edit_profile')
         except RequestEntityTooLarge:
             return redirect(url_for('edit_profile', entity_error=1))
+
+
+@app.route('/post_movie', methods=['GET'])
+def post_movie():
+    return render_template('post_movie.htm')
