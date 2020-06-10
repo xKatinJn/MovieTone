@@ -96,3 +96,12 @@ class EditProfileForm(FlaskForm):
     language = StringField('Язык', render_kw={'placeholder': 'Язык'})
     submit = SubmitField('Сохранить')
     back = SubmitField('Назад')
+
+
+class CreatePostForm(FlaskForm):
+    title = StringField('Заголовок', validators=[DataRequired()], render_kw={'placeholder': 'До 64 символов'})
+    preview_text = TextAreaField('Превью-текст', validators=[DataRequired()],
+                                 render_kw={'placeholder': 'До 128 символов'})
+    text = TextAreaField('Основной текст', validators=[DataRequired()], render_kw={'placeholder': 'Основной текст'})
+    type = SelectField('Выберите категорию', choices=[(1, 'Сериал'), (2, 'Кино'), (3, 'Игра')])
+    submit_create = SubmitField('Создать')

@@ -7,6 +7,7 @@ venv
 .idea
 app/__pycache__
 __pycache__
+app/static/img/user_photos/
 # C extensions
 *.so
 

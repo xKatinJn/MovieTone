@@ -123,6 +123,32 @@ header{
 	position: fixed;
 	z-index: 100;
 }
+.glav_red{
+    max-width: 1277px;
+	margin: 0 auto;
+}
+.glav_red header{
+    background: #FFFFFF;
+}
+.glav_red_header_list{
+	display: flex;
+	align-items: center;
+}
+.glav_red_header_list li{
+	font-size: 20px;
+	font-family: segoe ui light;
+	color: #000000;
+	margin-right: 50px;
+	border-bottom: solid 1px #B21111;
+	transition: all ease 0.3s;
+}
+.glav_red_header_list li:hover{
+	border-bottom: solid 1px #fff;
+	transition: all ease 0.3s;
+}
+.glav_red_header_list li a{
+	color: #000000;
+}
 .general-conteiner{
 	max-width: 1277px;
 	margin: 0 auto;
@@ -1053,5 +1079,7 @@ font-size: 48px;
     color: red;
     margin-top: 10px;
 }
-
+.create_post{
+    text-align: center
+}
 @media only screen and (max-width: 768px)

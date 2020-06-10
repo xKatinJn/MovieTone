@@ -1,7 +1,7 @@
 import os
 from app import app, db
-from app.forms import RegistrationForm, LoginForm, EditProfileForm
-from app.models import User
+from app.forms import RegistrationForm, LoginForm, EditProfileForm, CreatePostForm
+from app.models import User, UserStatuses, Post
 
 from flask import render_template, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
@@ -31,6 +31,9 @@ def sign():
         user = User(email=email)
         user.set_password(password)
         db.session.add(user)
+        db.session.commit()
+        user_status = UserStatuses(status_id=1, user_id=User.query.filter_by(email=email).first().id)
+        db.session.add(user_status)
         db.session.commit()
         login_user(user)
         user = User.query.filter_by(id=current_user.id).first()
@@ -75,12 +78,14 @@ def review():
 
 @app.route('/new_weekend_posts', methods=['GET'])
 def new_weekend_posts():
-    return render_template('new_weekend_posts.htm', title='Новые публикации')
+    return render_template('new_weekend_posts.htm', title='Новые публикации', glav_red=True)
 
 
 @app.route('/user_profile', methods=['GET'])
 def user_profile():
     user_id = request.args.get('user_id')
+    if not user_id:
+        user_id = current_user.id
     user = User.query.filter_by(id=int(user_id)).first()
     if user:
         return render_template('user_profile.htm', title=f'Профиль {user.nickname}', user=user)
@@ -95,11 +100,9 @@ def edit_profile():
     edit = {}
     for arg in request.args:
         edit[arg] = request.args.get(arg)
-    print(edit)
     if form.submit.data:
         user = current_user
         for attribute in request.args:
-            print('attribute: ', attribute)
             if not form[attribute].data:
                 return redirect('edit_profile')
             if attribute != 'birthday':
@@ -125,9 +128,7 @@ def edit_profile():
                                            nickname_error=True)
             user.__setattr__(attribute, form[attribute].data)
         db.session.commit()
-        print('EDITED')
         return redirect('edit_profile')
-    print(form.errors)
     if form.back.data:
         return redirect('edit_profile')
     return render_template('edit_profile.htm', title='Редактирование профиля', form=form, edit=edit)
@@ -148,7 +149,6 @@ def upload_profile_photo():
             current_user.has_photo = True
             current_user.photo_path = f'../static/img/{f.filename}'
             db.session.commit()
-            print(current_user.photo_path)
             return redirect('edit_profile')
         except RequestEntityTooLarge:
             return redirect(url_for('edit_profile', entity_error=1))
@@ -157,3 +157,72 @@ def upload_profile_photo():
 @app.route('/post_movie', methods=['GET'])
 def post_movie():
     return render_template('post_movie.htm')
+
+
+@app.route('/create_post', methods=['GET', 'POST'])
+@login_required
+def create_post():
+    form = CreatePostForm()
+    if form.submit_create.data:
+        print(form.errors)
+        print('VALIDATE')
+        post = Post(title=form.title.data,
+                    title_preview_text=form.preview_text.data,
+                    text=form.text.data,
+                    author=current_user.id,
+                    type=int(form.type.data),
+                    has_photo_preview=False,
+                    has_photo_header=False)
+        db.session.add(post)
+        db.session.commit()
+        print(post)
+        return render_template('create_post.html', title='Создание поста', set_photo=True, post=post)
+    return render_template('create_post.html', title='Создание поста', form=form)
+
+
+@app.route('/upload_post_photo', methods=['POST'])
+@login_required
+def upload_post_photo():
+    if request.method == 'POST':
+        try:
+            post = Post.query.filter_by(author=current_user.id).all()[-1]
+            files = [request.files[f'post_preview_photo'], request.files[f'post_header_photo']]
+            files[0].filename = f'post_preview_photo_{post.id}'
+            files[1].filename = f'post_header_photo_{post.id}'
+            for file in files:
+                file.filename = secure_filename(file.filename)
+                file_ext = file.filename.split('.')[-1]
+                if file_ext not in app.config['ALLOWED_EXTENSIONS']:
+                    return redirect(url_for('create_post', photo_error=1))
+            # files[0].filename = f'post_preview_photo_{current_user.id}.{file_ext}'
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+                print(file.filename.split('_'))
+                if 'preview' in file.filename.split('_'):
+                    post.has_photo_preview = True
+                    post.photo_preview_path = f'../static/img/{file.filename}'
+                else:
+                    post.has_photo_header = True
+                    post.photo_header_path = f'../static/img/{file.filename}'
+            db.session.commit()
+            return redirect(url_for('user_profile'))
+        except RequestEntityTooLarge:
+            return redirect(url_for('create_post', entity_error=1))
+# TODO: Доделать
+
+# @app.route('/upload_post_photo', methods=['POST'])
+# def upload_post_header_photo():
+#     if request.method == 'POST':
+#         try:
+#             post = Post.query.filter_by(author=current_user.id).all()[-1]
+#             f = request.files[f'post_header_photo_{post.id}']
+#             f.filename = secure_filename(f.filename)
+#             file_ext = f.filename.split('.')[-1]
+#             if file_ext not in app.config['ALLOWED_EXTENSIONS']:
+#                 return redirect(url_for('create_post', photo_error=1))
+#             f.filename = f'post_header_photo_{current_user.id}.{file_ext}'
+#             f.save(os.path.join(app.config['UPLOAD_FOLDER'], f.filename))
+#             current_user.has_photo = True
+#             current_user.photo_path = f'../static/img/{f.filename}'
+#             db.session.commit()
+#         except RequestEntityTooLarge:
+#             return redirect(url_for('create_post', entity_error=1))

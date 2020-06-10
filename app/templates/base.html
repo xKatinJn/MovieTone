@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>{{title}}</title>
+	<title>{{ title }}</title>
 	<link rel="stylesheet" type="text/css" href="../static/css/style.css">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=divice-width, initial-scale=1.0">
@@ -12,16 +12,20 @@
 		<div class="burger-menus" v-bind:class="{ closeburger : isClose }">
 			<div class="burger-menus_obvertka">
 				<div class="box-closemenburg" v-on:click="menyClose">
-					<img src="../static/img/close-icg.png" alt="">
+					{% if glav_red %}
+						<img src="../static/img/glav_red_close-icg.png" alt="">
+					{% else %}
+						<img src="../static/img/close-icg.png" alt="">
+					{% endif %}
 				</div>
 				<ul class="header_list-burg">
+					<li><a href="{{ url_for('index') }}">Главная</a></li>
+					<li><a href="{{ url_for('new_weekend_posts') }}">Что нового</a></li>
 					{% if current_user.is_anonymous %}
 						<li><a href="{{ url_for('sign') }}">Вход</a></li>
 					{% else %}
 						<li><a href="{{ url_for('user_profile', user_id=current_user.id) }}">Профиль</a></li>
 					{% endif %}
-					<li><a href="{{ url_for('index') }}">Главная</a></li>
-					<li><a href="{{ url_for('new_weekend_posts') }}">Что нового</a></li>
 					{% if current_user.is_authenticated %}
 						<li><a href="{{ url_for('logout') }}">Выйти</a></li>
 					{% endif %}
@@ -37,22 +41,39 @@
 				</div>
 			</div>
 		</div>
-		<header>
-			<div class="general-conteiner">
-			<nav class="header_nav">
-				<ul class="header_list">
-					<li><a href="{{ url_for('index') }}">MOVIETONE</a></li>
-					<li><a href="">СЕРИАЛЫ</a></li>
-					<li><a href="">КИНО</a></li>
-					<li><a href="">ИГРЫ</a></li>
-				</ul>
-			</nav>
-				<div class="header_burger" v-on:click="menyOpen">
-					<img src="../static/img/burger.png" alt="">
-				</div>
-
+		{% if glav_red %}
+			<div class="glav_red">
+		{% endif %}
+				<header>
+					{% if glav_red %}
+					<div class="general-conteiner">
+					<nav class="header_nav">
+						<ul class="glav_red_header_list">
+					{% else %}
+					<div class="general-conteiner">
+					<nav class="header_nav">
+						<ul class="header_list">
+					{% endif %}
+							<li><a href="{{ url_for('index') }}">MOVIETONE</a></li>
+							<li><a href="{{ url_for('review', type=1) }}">СЕРИАЛЫ</a></li>
+							<li><a href="{{ url_for('review', type=2) }}">КИНО</a></li>
+							<li><a href="{{ url_for('review', type=3) }}">ИГРЫ</a></li>
+						</ul>
+					</nav>
+						{% if glav_red %}
+						<div class="header_burger" v-on:click="menyOpen">
+							<img src="../static/img/glav_red_burger.png" alt="">
+						</div>
+						{% else %}
+						<div class="header_burger" v-on:click="menyOpen">
+							<img src="../static/img/burger.png" alt="">
+						</div>
+						{% endif %}
+					</div>
+				</header>
+			{% if glav_red %}
 			</div>
-		</header>
+			{% endif %}
 		<main>
 		{% block content %}
 		{% endblock %}
