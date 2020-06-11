@@ -1,7 +1,7 @@
 import os
 from app import app, db
 from app.forms import RegistrationForm, LoginForm, EditProfileForm, CreatePostForm
-from app.models import User, UserStatuses, Post
+from app.models import User, UserStatuses, Post, PostChecked
 
 from flask import render_template, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
@@ -71,11 +71,6 @@ def vacancy():
     return render_template('vacancy.htm', title='Вакансии')
 
 
-@app.route('/review', methods=['GET'])
-def review():
-    return render_template('review.htm', title='Рецензии')
-
-
 @app.route('/new_weekend_posts', methods=['GET'])
 def new_weekend_posts():
     return render_template('new_weekend_posts.htm', title='Новые публикации', glav_red=True)
@@ -86,9 +81,16 @@ def user_profile():
     user_id = request.args.get('user_id')
     if not user_id:
         user_id = current_user.id
-    user = User.query.filter_by(id=int(user_id)).first()
+    else:
+        user_id = int(user_id)
+    user = User.query.filter_by(id=user_id).first()
+    Post.query.filter_by(has_photo_header=0).delete()
+    posts = Post.query.filter_by(author=user_id).all()[::-1]
+    posts_len = len(posts)
+    checked_posts = len(PostChecked.query.filter_by(user_id=user_id).all())
     if user:
-        return render_template('user_profile.htm', title=f'Профиль {user.nickname}', user=user)
+        return render_template('user_profile.htm', title=f'Профиль {user.nickname}',
+                               user=user, posts=posts, posts_len=posts_len, checked_posts=checked_posts)
     else:
         return render_template('user_profile.htm', title=f'Профиль {user.nickname}')
 
@@ -154,11 +156,6 @@ def upload_profile_photo():
             return redirect(url_for('edit_profile', entity_error=1))
 
 
-@app.route('/post_movie', methods=['GET'])
-def post_movie():
-    return render_template('post_movie.htm')
-
-
 @app.route('/create_post', methods=['GET', 'POST'])
 @login_required
 def create_post():
@@ -166,6 +163,7 @@ def create_post():
     if form.submit_create.data:
         print(form.errors)
         print('VALIDATE')
+        Post.query.filter_by(has_photo_header=0).delete()
         post = Post(title=form.title.data,
                     title_preview_text=form.preview_text.data,
                     text=form.text.data,
@@ -186,15 +184,19 @@ def upload_post_photo():
     if request.method == 'POST':
         try:
             post = Post.query.filter_by(author=current_user.id).all()[-1]
+            print(request.files)
             files = [request.files[f'post_preview_photo'], request.files[f'post_header_photo']]
-            files[0].filename = f'post_preview_photo_{post.id}'
-            files[1].filename = f'post_header_photo_{post.id}'
-            for file in files:
-                file.filename = secure_filename(file.filename)
-                file_ext = file.filename.split('.')[-1]
+            files_exts = [secure_filename(file.filename).split('.')[-1] for file in files]
+            print(files_exts)
+            for file_ext in files_exts:
                 if file_ext not in app.config['ALLOWED_EXTENSIONS']:
-                    return redirect(url_for('create_post', photo_error=1))
-            # files[0].filename = f'post_preview_photo_{current_user.id}.{file_ext}'
+                    print(f'FILE EXT FAILED, {file_ext}')
+                    return redirect(url_for('create_post', ext_error=1))
+            files[0].filename = f'post_preview_photo_{post.id}.{files_exts[0]}'
+            files[1].filename = f'post_header_photo_{post.id}.{files_exts[1]}'
+            print('FILES RENAMED ', [file.filename for file in files])
+            for file in files:
+                print('ITERATION IN FILES ', file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
                 print(file.filename.split('_'))
                 if 'preview' in file.filename.split('_'):
@@ -203,26 +205,38 @@ def upload_post_photo():
                 else:
                     post.has_photo_header = True
                     post.photo_header_path = f'../static/img/{file.filename}'
+            Post.query.filter_by(has_photo_header=0).delete()
             db.session.commit()
             return redirect(url_for('user_profile'))
         except RequestEntityTooLarge:
             return redirect(url_for('create_post', entity_error=1))
-# TODO: Доделать
+# TODO: Доделать вывод ошибок
 
-# @app.route('/upload_post_photo', methods=['POST'])
-# def upload_post_header_photo():
-#     if request.method == 'POST':
-#         try:
-#             post = Post.query.filter_by(author=current_user.id).all()[-1]
-#             f = request.files[f'post_header_photo_{post.id}']
-#             f.filename = secure_filename(f.filename)
-#             file_ext = f.filename.split('.')[-1]
-#             if file_ext not in app.config['ALLOWED_EXTENSIONS']:
-#                 return redirect(url_for('create_post', photo_error=1))
-#             f.filename = f'post_header_photo_{current_user.id}.{file_ext}'
-#             f.save(os.path.join(app.config['UPLOAD_FOLDER'], f.filename))
-#             current_user.has_photo = True
-#             current_user.photo_path = f'../static/img/{f.filename}'
-#             db.session.commit()
-#         except RequestEntityTooLarge:
-#             return redirect(url_for('create_post', entity_error=1))
+
+@app.route('/post', methods=['GET', 'POST'])
+def post():
+    post_id = request.args.get('id')
+    post_content = Post.query.filter_by(id=int(post_id)).first()
+    if not post_content:
+        return render_template('post.htm', error=True)
+    user = User.query.filter_by(id=post_content.author).first()
+    if current_user.is_authenticated:
+        checked_posts = PostChecked.query.filter_by(user_id=current_user.id, post_id=int(post_id)).first()
+        if not checked_posts:
+            checked_post = PostChecked(user_id=current_user.id, post_id=int(post_id))
+            db.session.add(checked_post)
+            db.session.commit()
+    return render_template('post.htm', user=user, post=post_content)
+
+
+@app.route('/review', methods=['GET'])
+def review():
+    post_type = request.args.get('type')
+    if not post_type:
+        post_type = 1
+    raw_posts = Post.query.filter_by(type=int(post_type)).all()
+    posts = []
+    for post_content in raw_posts:
+        posts.append([post_content, User.query.filter_by(id=post_content.author).first()])
+    posts = posts[::-1]
+    return render_template('review.htm', title='Рецензии', posts=posts)

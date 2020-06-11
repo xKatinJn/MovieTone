@@ -32,10 +32,10 @@
 
 			    			<div class="linekab-namber-post">
 			    				<div class="namber-postbox">
-			    					<h4>Просмотренных рецензий: <br>5</h4>
+			    					<h4>Просмотренных рецензий: <br>{{ checked_posts }}</h4>
 			    				</div>
 			    				<div class="namber-postbox">
-			    					<h4>Написанных рецензий:<br> 20</h4>
+			    						<h4>Написанных рецензий:<br>{{ posts_len }}</h4>
 			    				</div>
 			    			</div>	
 				</div>
@@ -44,75 +44,21 @@
 						<a href="{{ url_for('edit_profile') }}">Редактировать профиль</a>
 					</div>
 					<div class="linesredarlink">
-						<a href="{{ url_for('create_post') }}">Написать пост</a>
+						<a href="{{ url_for('create_post') }}">Написать рецензию</a>
 					</div>
 				{% endif %}
 				<div class="cont-user-recensies">
 					<h3 class="titleusrecens">Последние рецензии</h3>
 					<div class="line-recensiiuss">
-						<a href="" class="line-recensiiuss_box">
-							<div class="boxborss">
-								<img src="../static/img/333jpg.jpg" alt="">
-							</div>
-							
-							<p>READ DEAD ONLINE</p>
-						</a>
+						{% for post in posts %}
+							<a href="{{ url_for('post', id=post.id) }}" class="line-recensiiuss_box">
+								<div class="boxborss">
+									<img src="{{ post.photo_preview_path }}" alt="">
+								</div>
 
-						<a href="" class="line-recensiiuss_box">
-							<div class="boxborss">
-								<img src="../static/img/most2.jpg" alt="">
-							</div>
-							
-							<p>КОМНАТА</p>
-						</a>
-
-						<a href="" class="line-recensiiuss_box">
-							<div class="boxborss">
-								<img src="../static/img/most4.jpg" alt="">
-							</div>
-							
-							<p>ВЫПУСКНИК</p>
-						</a>
-
-						<a href="" class="line-recensiiuss_box">
-							<div class="boxborss">
-								<img src="../static/img/most3.jpg" alt="">
-							</div>
-							
-							<p>АКАДЕМИЯ РАШМОР</p>
-						</a>
-
-						<a href="" class="line-recensiiuss_box">
-							<div class="boxborss">
-								<img src="../static/img/most1.jpg" alt="">
-							</div>
-							
-							<p>БУТЫЛОЧНАЯ РАКЕТА</p>
-						</a>
-
-						<a href="" class="line-recensiiuss_box">
-							<div class="boxborss">
-								<img src="../static/img/most8.jpg" alt="">
-							</div>
-							
-							<p>JOURNEY</p>
-						</a>
-
-						<a href="" class="line-recensiiuss_box">
-							<div class="boxborss">
-								<img src="../static/img/most5.jpg" alt="">
-							</div>
-							
-							<p>АРАХИСОВЫЙ СОКОЛ</p>
-						</a>
-
-						<a href="" class="line-recensiiuss_box">
-							<div class="boxborss">
-								<img src="../static/img/most6.jpg" alt="">
-							</div>
-							
-							<p>DEATH STRANDING</p>
-						</a>
+								<p>{{ post.title }}</p>
+							</a>
+						{% endfor %}
 					</div>
 				</div>
 			</section>

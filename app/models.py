@@ -53,7 +53,7 @@ class UserStatuses(db.Model):
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     author = db.Column(db.Integer)
-    title = db.Column(db.String(64))
+    title = db.Column(db.String(32))
     title_preview_text = db.Column(db.String(128))
     text = db.Column(db.Text)
     type = db.Column(db.Integer)
@@ -73,3 +73,12 @@ class PostType(db.Model):
 
     def __repr__(self):
         return f'<PostType id: {self.id}, name: {self.name}>'
+
+
+class PostChecked(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    post_id = db.Column(db.Integer)
+
+    def __repr__(self):
+        return f'<PostChecked id: {self.id}, u_id: {self.user_id}, p_id: {self.post_id}>'

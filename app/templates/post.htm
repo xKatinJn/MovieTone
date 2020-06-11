@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+			<section class="secpost">
+				{% if error %}
+					<div class="general-container">
+						<div style="text-align: center; padding-top: 10%; padding-bottom: 10%">
+							<h1 class="error">Пост не найден</h1>
+						</div>
+					</div>
+				{% else %}
+					<div class="image-post">
+						<img src="{{ post.photo_header_path }}" alt="">
+					</div>
+					<div class="general-conteiner">
+						<div class="title-postspage-line">
+							<h3 class="post-titl">{{ post.title }}</h3>
+							<p class="autor-posts">автор:@{{ user.nickname }}</p>
+						</div>
+
+						<div class="post-contenttext">
+							<p><b>{{ post.title_preview_text }}</b></p>
+							<p>{{ post.text }}</p>
+	<!--			    		<img src="../static/img/13.jpg" alt="">-->
+						</div>
+					</div>
+				{% endif %}
+			</section>
+{% endblock %}

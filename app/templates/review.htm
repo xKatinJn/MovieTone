@@ -1,82 +1,37 @@
 {% extends "base.html" %}
 {% block content %}
-			<section class="secpostsWekend">
-				<div class="general-conteiner">
+		<section class="secpostsWekend">
+			<div class="general-conteiner">
+				{% if posts %}
 					<h4 class="titlepostswekk">Рецензии по вашим интересам:</h4>
 					<div class="posts-week-conteiner">
-						
+						{% for post in posts %}
+							<div class="post-week-box ss23ff">
+								<div class="bost-week-box_obvertka">
+									<div class="postweek-info">
+										<div class="obse22">
+											<h4 class="titlerecens" style="color: #A71717;">{{ post[0].title }}</h4>
+										<p class="texrecense">
+											{{ post[0].title_preview_text }}
+										</p>
+										<div class="asd">
+											<a href="{{ url_for('post', id=post[0].id) }}" style="color: #A71717; border:solid 1px #A71717 " class="linlpostweek">ЧИТАТЬ</a>
+										</div>
+										</div>
 
-						<div class="post-week-box ss23ff">
-							<div class="bost-week-box_obvertka">
-								<div class="postweek-info">
-									<div class="obse22">
-										<h4 class="titlerecens" style="color: #A71717;">Звездные войны: <br>Пробуждение силы</h4>
-									<p class="texrecense">
-										"По трейлеру было трудно понять, чего ждать от этого фильма. Сыграет ли он на славе предыдущих фильмов, или же будет самостоятельной единицей в битве за кошельки и сердца кинолюбителей."
-									</p>
-									<div class="asd">
-										<a href="" style="color: #A71717; border:solid 1px #A71717 " class="linlpostweek">ЧИТАТЬ</a>
 									</div>
-									</div>
-									
+									<img src="{{ post[0].photo_preview_path }}" alt="">
 								</div>
-								<img src="../static/img/pt4.jpg" alt="">
+								<p class="autoppostsweek">автор:@{{ post[1].nickname }}</p>
 							</div>
-							<p class="autoppostsweek">автор:@railway</p>
-						</div>
-
-						<div class="post-week-box ss23ff">
-							<div class="bost-week-box_obvertka">
-								<div class="postweek-info">
-									<div class="obse22">
-										<h4 class="titlerecens" style="color: #8EA45B;">1917</h4>
-									<p class="texrecense">
-										"Вальс не для всех. Вальсирующие выглядят плавными, неспешными, а ритм танца лишён страсти. Вместо неё грация спокойных размеренных движений. Но за любым танцем стоят репетиции, труд и тяжёлая подготовка."
-									</p>
-									<div class="asd">
-										<a href="" style="color: #8EA45B; border:solid 1px #8EA45B " class="linlpostweek">ЧИТАТЬ</a>
-									</div>
-									</div>
-									
-								</div>
-								<img src="../static/img/23.jpg" alt="">
-							</div>
-							<p class="autoppostsweek">автор:@railway</p>
-						</div>
-
-						<div class="post-week-box ss23ff">
-							<div class="bost-week-box_obvertka">
-								<div class="postweek-info">
-									<div class="obse22">
-										<h4 class="titlerecens" style="color: #D83B00;">Сиротский Бруклин</h4>
-									<p class="texrecense">
-										"Подтверждая тезис «Талантливый человек талантлив во всём», известный и любимый актёр Эдвард Нортон представил миру свою вторую режиссерскую работу — экранизацию одноименного романа Джонатана Летема «Сиротский Бруклин». Нео-нуар, провалившийся в прокате, тем не менее не может не привлечь к себе внимание."
-									</p>
-									<div class="asd">
-										<a href="" style="color: #D83B00; border:solid 1px #D83B00 " class="linlpostweek">ЧИТАТЬ</a>
-									</div>
-									</div>
-									
-								</div>
-								<img src="../static/img/3.jpg" alt="">
-							</div>
-							<p class="autoppostsweek">автор:@railway</p>
-						</div>
+						{% endfor %}
 					</div>
-
-					<div class="paginationlines">
-						<div class="arcons lleft">
-							<img src="../static/img/right-arrow.png" alt="">
-						</div>
-						<div class="namber-linepagin">
-							<div class="bxpagins">1</div>
-							<div class="bxpagins">2</div>
-							<div class="bxpagins">3</div>
-						</div>
-						<div class="arcons rright">
-							<img src="../static/img/right-arrow.png" alt="">
-						</div>
-					</div>
+				{% else %}
+				<div style="text-align: center; padding-top: 10%; padding-bottom: 10%">
+					<h4 class="titlepostswekk">Рецензий пока что нет...<br><a style="color: green; " href="{{ url_for('create_post') }}"><b>Станьте первым!</b></a></h4>
 				</div>
-			</section>
+				{% endif %}
+			</div>
+		</section>
+
 {% endblock %}

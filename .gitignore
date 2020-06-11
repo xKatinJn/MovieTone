@@ -8,6 +8,7 @@ venv
 app/__pycache__
 __pycache__
 app/static/img/user_photos/
+app/static/test_photo
 # C extensions
 *.so
 

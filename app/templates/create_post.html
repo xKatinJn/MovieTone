@@ -2,13 +2,18 @@
 
 {% block content %}
     <section class="secpost" style="align-items: center; padding: 10%; padding-top: 3%; padding-bottom: 3%">
-		{% if set_photo or request.args.get('photo_error') or request.args.get('entity_error') %}
+		{% if set_photo or request.args.get('ext_error') or request.args.get('entity_error') %}
 		<div style="padding: 30%; padding-top: 3%; padding-bottom: 3%">
 			<form action="{{ url_for('upload_post_photo') }}" method="POST" enctype="multipart/form-data">
 				<h2>Загрузите превью-фото</h2>
 				<input class="addavatar" type="file" name="post_preview_photo" title="Добавить превью-фото">
 				<h2>Загрузите внутреннее фото</h2>
 				<input class="addavatar" type="file" name="post_header_photo" title="Добавить хеадер-фото">
+				{% if request.args.get('entity_error') %}
+					<p class="error">Один из файлов превышает допустимый размер в 12 мб.</p>
+				{% elif request.args.get('ext_error') %}
+					<p class="error">Один из файлов имеет недопустимое расширение для фото</p>
+				{% endif %}
 				<div class="btn-panel">
 					<input class="addavatar" type="submit">
 				</div>
@@ -18,7 +23,7 @@
 			<form action="" method="POST">
 				<div class="create_post">
 					<h2>{{ form.title.label }}</h2><br>
-					{{ form.title(maxlength=64, size=64) }}<br>
+					{{ form.title(maxlength=32, size=32) }}<br>
 					{% for error in form.title.errors %}
 						<p class="error">{{ error }}</p>
 					{% endfor %}
@@ -30,11 +35,11 @@
 					<h2>{{ form.type.label }}</h2><br>
 					{{ form.type }}
 					<h2>{{ form.text.label }}</h2><br>
-					{{ form.text(cols="64", rows="16") }}<br><br>
+					{{ form.text(cols="64", rows="16", id="main_textarea") }}<br><br>
 					{% for error in form.text.errors %}
 						<p class="error">{{ error }}</p>
 					{% endfor %}
-					<div class="btn-panel" style="width: auto; align-items: center; padding-left: 30%; padding-right: 30%;">
+					<div class="btn-panel" style="padding-left: 30%; padding-right: 30%;">
 						{{ form.submit_create(style="background: green") }}
 					</div>
 				</div>
