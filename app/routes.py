@@ -161,8 +161,6 @@ def upload_profile_photo():
 def create_post():
     form = CreatePostForm()
     if form.submit_create.data:
-        print(form.errors)
-        print('VALIDATE')
         Post.query.filter_by(has_photo_header=0).delete()
         post = Post(title=form.title.data,
                     title_preview_text=form.preview_text.data,
@@ -173,7 +171,6 @@ def create_post():
                     has_photo_header=False)
         db.session.add(post)
         db.session.commit()
-        print(post)
         return render_template('create_post.html', title='Создание поста', set_photo=True, post=post)
     return render_template('create_post.html', title='Создание поста', form=form)
 
@@ -184,21 +181,15 @@ def upload_post_photo():
     if request.method == 'POST':
         try:
             post = Post.query.filter_by(author=current_user.id).all()[-1]
-            print(request.files)
             files = [request.files[f'post_preview_photo'], request.files[f'post_header_photo']]
             files_exts = [secure_filename(file.filename).split('.')[-1] for file in files]
-            print(files_exts)
             for file_ext in files_exts:
                 if file_ext not in app.config['ALLOWED_EXTENSIONS']:
-                    print(f'FILE EXT FAILED, {file_ext}')
                     return redirect(url_for('create_post', ext_error=1))
             files[0].filename = f'post_preview_photo_{post.id}.{files_exts[0]}'
             files[1].filename = f'post_header_photo_{post.id}.{files_exts[1]}'
-            print('FILES RENAMED ', [file.filename for file in files])
             for file in files:
-                print('ITERATION IN FILES ', file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
-                print(file.filename.split('_'))
                 if 'preview' in file.filename.split('_'):
                     post.has_photo_preview = True
                     post.photo_preview_path = f'../static/img/{file.filename}'
@@ -210,7 +201,6 @@ def upload_post_photo():
             return redirect(url_for('user_profile'))
         except RequestEntityTooLarge:
             return redirect(url_for('create_post', entity_error=1))
-# TODO: Доделать вывод ошибок
 
 
 @app.route('/post', methods=['GET', 'POST'])
