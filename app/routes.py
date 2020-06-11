@@ -198,7 +198,7 @@ def upload_post_photo():
                     post.photo_header_path = f'../static/img/{file.filename}'
             Post.query.filter_by(has_photo_header=0).delete()
             db.session.commit()
-            return redirect(url_for('user_profile'))
+            return redirect(url_for('post', id=post.id))
         except RequestEntityTooLarge:
             return redirect(url_for('create_post', entity_error=1))
 
