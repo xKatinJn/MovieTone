@@ -41,39 +41,21 @@
 				</div>
 			</div>
 		</div>
-		{% if glav_red %}
-			<div class="glav_red">
-		{% endif %}
-				<header>
-					{% if glav_red %}
-					<div class="general-conteiner">
-					<nav class="header_nav">
-						<ul class="glav_red_header_list">
-					{% else %}
-					<div class="general-conteiner">
-					<nav class="header_nav">
-						<ul class="header_list">
-					{% endif %}
-							<li><a href="{{ url_for('index') }}">MOVIETONE</a></li>
-							<li><a href="{{ url_for('review', type=1) }}">СЕРИАЛЫ</a></li>
-							<li><a href="{{ url_for('review', type=2) }}">КИНО</a></li>
-							<li><a href="{{ url_for('review', type=3) }}">ИГРЫ</a></li>
-						</ul>
-					</nav>
-						{% if glav_red %}
-						<div class="header_burger" v-on:click="menyOpen">
-							<img src="../static/img/glav_red_burger.png" alt="">
-						</div>
-						{% else %}
-						<div class="header_burger" v-on:click="menyOpen">
-							<img src="../static/img/burger.png" alt="">
-						</div>
-						{% endif %}
+			<header>
+				<div class="general-conteiner">
+				<nav class="header_nav">
+					<ul class="header_list">
+						<li><a href="{{ url_for('index') }}">MOVIETONE</a></li>
+						<li><a href="{{ url_for('review', type=1) }}">СЕРИАЛЫ</a></li>
+						<li><a href="{{ url_for('review', type=2) }}">КИНО</a></li>
+						<li><a href="{{ url_for('review', type=3) }}">ИГРЫ</a></li>
+					</ul>
+				</nav>
+					<div class="header_burger" v-on:click="menyOpen">
+						<img src="../static/img/burger.png" alt="">
 					</div>
-				</header>
-			{% if glav_red %}
-			</div>
-			{% endif %}
+				</div>
+			</header>
 		<main>
 		{% block content %}
 		{% endblock %}

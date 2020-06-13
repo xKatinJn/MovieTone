@@ -2,6 +2,7 @@ import os
 from app import app, db
 from app.forms import RegistrationForm, LoginForm, EditProfileForm, CreatePostForm
 from app.models import User, UserStatuses, Post, PostChecked
+from app.service.useful_scripts import check_if_post_checked
 
 from flask import render_template, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
@@ -73,7 +74,12 @@ def vacancy():
 
 @app.route('/new_weekend_posts', methods=['GET'])
 def new_weekend_posts():
-    return render_template('new_weekend_posts.htm', title='Новые публикации', glav_red=True)
+    glavred_id = UserStatuses.query.filter_by(status_id=2).first()
+    if not glavred_id:
+        return render_template('new_weekend_posts.htm', title='Новые публикации', glav_red=True)
+    glavred = User.query.filter_by(id=glavred_id.user_id).first()
+    posts = [[post_content, glavred] for post_content in Post.query.filter_by(author=glavred.id).all()[::-1]]
+    return render_template('new_weekend_posts.htm', title='Новые публикации', glav_red=True, posts=posts)
 
 
 @app.route('/user_profile', methods=['GET'])
@@ -211,11 +217,7 @@ def post():
         return render_template('post.htm', error=True)
     user = User.query.filter_by(id=post_content.author).first()
     if current_user.is_authenticated:
-        checked_posts = PostChecked.query.filter_by(user_id=current_user.id, post_id=int(post_id)).first()
-        if not checked_posts:
-            checked_post = PostChecked(user_id=current_user.id, post_id=int(post_id))
-            db.session.add(checked_post)
-            db.session.commit()
+        check_if_post_checked(current_user, post_id)
     return render_template('post.htm', user=user, post=post_content)
 
 

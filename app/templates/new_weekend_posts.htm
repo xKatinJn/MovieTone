@@ -2,74 +2,28 @@
 {% block content %}
 			<section class="secpostsWekend">
 				<div class="general-conteiner">
-					<h4 class="titlepostswekk">Новые статьи за неделю</h4>
-					<div class="posts-week-conteiner">
-						<div class="post-week-box">
-							<div class="bost-week-box_obvertka">
-								<div class="postweek-info">
-									<h4>Смерть в диких условиях. Александр Супербродяга и чему нас учит его история</h4>
-									<div class="asd">
-										<a href="" class="linlpostweek">ЧИТАТЬ</a>
+					{% if posts %}
+						<h4 class="titlepostswekk">Новые статьи за неделю</h4>
+						<div class="posts-week-conteiner">
+							{% for post in posts %}
+								<div class="post-week-box">
+									<div class="bost-week-box_obvertka">
+										<div class="postweek-info">
+											<h4>{{ post[0].title_preview_text }}</h4>
+											<div class="asd">
+												<a href="{{ url_for('post', id=post[0].id) }}" class="linlpostweek">ЧИТАТЬ</a>
+											</div>
+										</div>
+										<img src="{{ post[0].photo_preview_path }}" alt="">
 									</div>
-									
+									<p class="autoppostsweek">автор:@{{ post[1].nickname }}</p>
 								</div>
-								<img src="../static/img/5.jpg" alt="">
-							</div>
-							<p class="autoppostsweek">автор:@главред</p>
+							{% endfor %}
+						{% else %}
+						<div style="text-align: center; padding-top: 10%; padding-bottom: 10%">
+							<h4 class="titlepostswekk">Рецензий пока что нет...</h4>
 						</div>
-
-						<div class="post-week-box">
-							<div class="bost-week-box_obvertka">
-								<div class="postweek-info">
-									<h4>Интервью с "гением" игровой индустрии.<br> Хидео Кодзима о своих планах на будущее.</h4>
-									<div class="asd">
-										<a href="" class="linlpostweek">ЧИТАТЬ</a>
-									</div>
-								</div>
-								<img src="../static/img/read-big2.jpeg" alt="">
-							</div>
-							<p class="autoppostsweek">автор:@главред</p>
-						</div>
-
-						<div class="post-week-box">
-							<div class="bost-week-box_obvertka">
-								<div class="postweek-info">
-									<h4>Роберт Дауни - Младший. История становления актера</h4>
-									<div class="asd">
-										<a href="" class="linlpostweek">ЧИТАТЬ</a>
-									</div>
-								</div>
-								<img src="../static/img/orig.jpeg" alt="">
-							</div>
-							<p class="autoppostsweek">автор:@главред</p>
-						</div>
-
-						<div class="post-week-box">
-							<div class="bost-week-box_obvertka">
-								<div class="postweek-info">
-									<h4>Days Gone - Недооцененный эксклюзив Sony</h4>
-									<div class="asd">
-										<a href="" class="linlpostweek">ЧИТАТЬ</a>
-									</div>
-								</div>
-								<img src="../static/img/88.jpg" alt="">
-							</div>
-							<p class="autoppostsweek">автор:@главред</p>
-						</div>
-					</div>
-
-					<div class="paginationlines">
-						<div class="arcons lleft">
-							<img src="../static/img/right-arrow.png" alt="">
-						</div>
-						<div class="namber-linepagin">
-							<div class="bxpagins">1</div>
-							<div class="bxpagins">2</div>
-							<div class="bxpagins">3</div>
-						</div>
-						<div class="arcons rright">
-							<img src="../static/img/right-arrow.png" alt="">
-						</div>
+						{% endif %}
 					</div>
 				</div>
 			</section>
