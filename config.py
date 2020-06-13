@@ -2,7 +2,7 @@ import os
 
 
 class Config(object):
-    SECRET_KEY = 'ASdddsaAS###!@#3123kb9aasDdn09123s109'
+    SECRET_KEY = 'secret_key'
 
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URI')\
         or 'mysql+pymysql://sammy:password@localhost/movietone_db'
